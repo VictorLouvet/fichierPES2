@@ -14,6 +14,10 @@ import javax.swing.text.Caret;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JList;
@@ -43,6 +47,10 @@ public class Fprincipale extends JFrame {
 	 * Create the frame.
 	 */
 	public Fprincipale() {
+		Date actuelle = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String dat = dateFormat.format(actuelle);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 663, 420);
 		contentPane = new JPanel();
@@ -54,6 +62,11 @@ public class Fprincipale extends JFrame {
 		textFieldChemin.setBounds(21, 37, 252, 20);
 		contentPane.add(textFieldChemin);
 		textFieldChemin.setColumns(10);
+
+		JButton btnLire = new JButton("Lire");
+		btnLire.setBounds(438, 36, 89, 23);
+		contentPane.add(btnLire);
+		btnLire.setEnabled(false);
 		
 		JButton btnChoisirRpertoire = new JButton("Choisir r\u00E9pertoire");
 		btnChoisirRpertoire.addActionListener(new ActionListener() {
@@ -66,6 +79,7 @@ public class Fprincipale extends JFrame {
 
 			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			      textFieldChemin.setText(chooser.getSelectedFile().getAbsolutePath());
+			      btnLire.setEnabled(true);
 			    } else {
 			      System.out.println("No Selection ");
 			    }
@@ -73,10 +87,6 @@ public class Fprincipale extends JFrame {
 		});
 		btnChoisirRpertoire.setBounds(283, 36, 145, 23);
 		contentPane.add(btnChoisirRpertoire);
-		
-		JButton btnLire = new JButton("Lire");
-		btnLire.setBounds(438, 36, 89, 23);
-		contentPane.add(btnLire);
 		
 		JList listFichiers = new JList();
 		listFichiers.setBounds(21, 103, 252, 267);
@@ -97,5 +107,10 @@ public class Fprincipale extends JFrame {
 		JButton btnAnalyser = new JButton("Analyser");
 		btnAnalyser.setBounds(297, 187, 89, 23);
 		contentPane.add(btnAnalyser);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setBounds(506, 11, 119, 14);
+		contentPane.add(lblDate);
+		lblDate.setText(dat);
 	}
 }
