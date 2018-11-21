@@ -11,7 +11,7 @@ public class analyse {
 	public ArrayList<String> listFichier = new ArrayList<String>();
 	public ArrayList<String> listErreurs = new ArrayList<String>();
 	
-	public static void isErrorExist(String pNomFichier) {
+	public void analyse(String pNomFichier) {
 		String line="";
 		boolean rep=false;
 
