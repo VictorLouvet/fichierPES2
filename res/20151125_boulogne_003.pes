@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-88-59-1"?>
+<n:PES_ACQUIT xmlns:n="http://www.minefi.gouv.fr/cp/helios/pes_v2/Rev0/retour/v2">
+  - <Enveloppe>
+     - <Parametres>
+         <Version V="2"/>
+         <TypFic V="PESALR2"/>
+         <NomFic V="MANDAT B8CCAS.Xml"/>
+       </Parametres>
+     - <Emetteur>
+         <Sigle V="NFI"/>
+         <Adresse V="SoluCompta 15.06.10"/>
+       </Emetteur>
+    </Enveloppe> 
+  - <EnTetePES>
+         <DteStr V="2015-09-21"/>
+         <IdPost V="062210"/>
+         <IdColl V="26620524400012"/>
+         <CodColl V="226"/>
+         <CodBud V="00"/>
+         <LibelleColBud V="CCAS DE BOULOGNE"/>
+     </EntetePES>
+   - <ACQUIT>
+     - <EnteteAcquit>
+           <IdVer V="2"/>
+       </EnteteAcquit>
+     - <ElementACQUIT>
+         <DomaineAck V="0"/>
+         <EtatAck V="0"/>
+       - <Erreur>
+           <NumAnoAck V="ERREUR_AUTRE"/>
+           <LibelleAnoAck V="Une erreur technique est survenue lors de la
+               validation/decoupage technique (Boite1) : Erreur de Validation XSD en
+               boite 1 [(148,7) attribute "V" has a bad value : the value does not match
+               the regular expression "[A-Z]{2,2} [0-9]{2,2}[a-zA-Z0-9]{1,..."/>
+
+         </Erreur>
+        </ElementACQUIT>
+     </ACQUIT>
+</n:PES_ACQUIT>

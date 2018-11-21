@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-88-59-1"?>
+<n:PES_ACQUIT xmlns:n="http://www.minefi.gouv.fr/cp/helios/pes_v2/Rev0/retour/v2">
+  - <Enveloppe>
+     - <Parametres>
+         <Version V="2"/>
+         <TypFic V="PESALR2"/>
+         <NomFic V="MANDAT B8SACHAT.Xml"/>
+       </Parametres>
+     - <Emetteur>
+         <Sigle V="NFI"/>
+         <Adresse V="SoluCompta 15.06.10"/>
+       </Emetteur>
+    </Enveloppe> 
+  - <EnTetePES>
+         <DteStr V="2015-09-20"/>
+         <IdPost V="062211"/>
+         <IdColl V="26670524400012"/>
+         <CodColl V="226"/>
+         <CodBud V="00"/>
+         <LibelleColBud V="SERVICE ACHAT"/>
+     </EntetePES>
+   - <ACQUIT>
+     - <EnteteAcquit>
+           <IdVer V="2"/>
+       </EnteteAcquit>
+     - <ElementACQUIT>
+         <DomaineAck V="0"/>
+         <EtatAck V="0"/>
+        </ElementACQUIT>
+     </ACQUIT>
+</n:PES_ACQUIT>
