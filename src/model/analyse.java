@@ -11,66 +11,71 @@ public class analyse {
 	public static ArrayList<String> listFichier = new ArrayList<String>();
 	public static ArrayList<String> listErreurs = new ArrayList<String>();
 	
-	public void analyse(String pNomFichier) {
+	
+	public static void analyse(String pRep) {
 		String line="";
 		boolean rep=false;
-
+		String erreur="";
+		
 		try {
-			File f = new File("res/"+pNomFichier);
-			FileReader fr = new FileReader(f);
-			BufferedReader br = new BufferedReader(fr);
-			
-			line= br.readLine();
-				while((line != null)) { //NullPointerException avec 004 et 007
-					
-					if(line.contains("<Erreur>")){   
+			for (String leFichier:listFichier) {
+				File f = new File(pRep+"\\"+leFichier);
+				FileReader fr = new FileReader(f);
+				BufferedReader br = new BufferedReader(fr);
+				
+				line= br.readLine();
+					while((line != null)) { //NullPointerException avec 004 et 007
 						
-						while(!line.contains("</Erreur>")) {
-							if(!line.contains("<Erreur>")) {
-								System.out.println(line);
+						if(line.contains("<Erreur>")){   
+							
+							while(!line.contains("</Erreur>")) {
+								if(!line.contains("<Erreur>")) {
+									erreur=line;
+									System.out.println(erreur);
+								}
+							
+							line= br.readLine();
+							
 							}
-						
+							
+							System.out.println("Erreur détecté dans le fichier : " + leFichier);
+							rep = true;
+						}
 						line= br.readLine();
 						
-						}
-						
-						System.out.println("Erreur détecté dans le fichier : " + pNomFichier);
-						rep = true;
 					}
-					line= br.readLine();
+					if(rep == true) {
+						listErreurs.add(leFichier);
+					}
 					
-				}	
-				if(rep == false) {
-					System.out.println("Aucune erreur détectée");
-				}
+					if(rep == false) {
+						System.out.println("Aucune erreur détectée");
+					}
+						
+					br.close();
+					fr.close();	
 					
-				br.close();
-				fr.close();	
-				
-				rep = false;
+					rep = false;
+			}
+			
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		
 	}
 	
-	public void recupNomFichier(String pRep) {
+	public static void recupNomFichier(String pRep) {
 		File repertoire = new File(pRep);
 		File[] filestab = repertoire.listFiles();
+		listFichier.clear();
 		
 		for(int i=0;i<filestab.length;i++) {
 			String temp = filestab[i].toString();
-			String temp2 = temp.replace(pRep,"");
+			String temp2 = temp.replace(pRep+"\\","");
 			listFichier.add(temp2);
-			System.out.println(temp2); //debug
+			//System.out.println(temp2); //debug
 		}
 		
 	}
-	
-	public void afficherErreurs(String pErreur) {
-		listErreurs.add(pErreur);
-	}
-	
-	
 	
 }

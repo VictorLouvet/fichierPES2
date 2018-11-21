@@ -3,24 +3,21 @@ package vue;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.Caret;
-
-import java.io.BufferedReader;
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import model.analyse;
 
 public class Fprincipale extends JFrame {
 
@@ -51,6 +48,9 @@ public class Fprincipale extends JFrame {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String dat = dateFormat.format(actuelle);
 		
+		DefaultListModel DLMfichiers = new DefaultListModel();
+		DefaultListModel DLMerreurs = new DefaultListModel();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 663, 420);
 		contentPane = new JPanel();
@@ -80,6 +80,13 @@ public class Fprincipale extends JFrame {
 			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			      textFieldChemin.setText(chooser.getSelectedFile().getAbsolutePath());
 			      btnLire.setEnabled(true);
+			      analyse.recupNomFichier(textFieldChemin.getText());
+			      
+			      for (int i = 0; i < analyse.listFichier.size(); i++) {
+					DLMfichiers.addElement( analyse.listFichier.get(i));
+				  }
+			      
+			      
 			    } else {
 			      System.out.println("No Selection ");
 			    }
@@ -105,6 +112,15 @@ public class Fprincipale extends JFrame {
 		contentPane.add(lblLectureDeXx);
 		
 		JButton btnAnalyser = new JButton("Analyser");
+		btnAnalyser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				analyse.analyse(textFieldChemin.getText());
+				System.out.println(analyse.listErreurs.get(0));
+			      for (int i = 0; i < analyse.listErreurs.size(); i++) {
+						DLMerreurs.addElement( analyse.listErreurs.get(i));
+					  }
+			}
+		});
 		btnAnalyser.setBounds(297, 187, 89, 23);
 		contentPane.add(btnAnalyser);
 		
@@ -112,5 +128,9 @@ public class Fprincipale extends JFrame {
 		lblDate.setBounds(506, 11, 119, 14);
 		contentPane.add(lblDate);
 		lblDate.setText(dat);
+		
+		listFichiers.setModel(DLMfichiers);
+		listErreur.setModel(DLMerreurs);
+		
 	}
 }
