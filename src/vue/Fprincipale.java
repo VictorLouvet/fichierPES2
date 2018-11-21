@@ -3,6 +3,8 @@ package vue;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +25,9 @@ public class Fprincipale extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldChemin;
+	static String nomFichier="";
+	static String erreurFichier="";
+	static String chemin="";
 
 	/**
 	 * Launch the application.
@@ -50,6 +55,9 @@ public class Fprincipale extends JFrame {
 		
 		DefaultListModel DLMfichiers = new DefaultListModel();
 		DefaultListModel DLMerreurs = new DefaultListModel();
+		
+		
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 663, 420);
@@ -81,7 +89,7 @@ public class Fprincipale extends JFrame {
 			      textFieldChemin.setText(chooser.getSelectedFile().getAbsolutePath());
 			      btnLire.setEnabled(true);
 			      analyse.recupNomFichier(textFieldChemin.getText());
-			      
+			      DLMfichiers.clear();
 			      for (int i = 0; i < analyse.listFichier.size(); i++) {
 					DLMfichiers.addElement( analyse.listFichier.get(i));
 				  }
@@ -131,6 +139,24 @@ public class Fprincipale extends JFrame {
 		
 		listFichiers.setModel(DLMfichiers);
 		listErreur.setModel(DLMerreurs);
+		
+		listErreur.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+
+		            // Double-click detected
+		        	nomFichier = listErreur.getSelectedValue().toString();
+		        	chemin= textFieldChemin.getText();
+		            erreur jf = new erreur();
+		            jf.setVisible(true);
+		        } else if (evt.getClickCount() == 3) {
+
+		            // Triple-click detected
+		            int index = list.locationToIndex(evt.getPoint());
+		        }
+		    }
+		});
 		
 	}
 }
