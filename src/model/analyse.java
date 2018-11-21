@@ -54,7 +54,7 @@ public class analyse {
 		
 	}
 	
-	public static void recupNomFichier(String pRep) {
+	public void recupNomFichier(String pRep) {
 		File repertoire = new File(pRep);
 		File[] filestab = repertoire.listFiles();
 		
@@ -65,6 +65,10 @@ public class analyse {
 			System.out.println(temp2); //debug
 		}
 		
+	}
+	
+	public void afficherErreurs(String pErreur) {
+		listErreurs.add(pErreur);
 	}
 	
 	
