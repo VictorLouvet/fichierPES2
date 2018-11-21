@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class analyse {
 
 	public String repertoire;
-	public ArrayList<String> listFichier = new ArrayList<String>();
-	public ArrayList<String> listErreurs = new ArrayList<String>();
+	public static ArrayList<String> listFichier = new ArrayList<String>();
+	public static ArrayList<String> listErreurs = new ArrayList<String>();
 	
 	public void analyse(String pNomFichier) {
 		String line="";
@@ -51,6 +51,19 @@ public class analyse {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		
+	}
+	
+	public static void recupNomFichier(String pRep) {
+		File repertoire = new File(pRep);
+		File[] filestab = repertoire.listFiles();
+		
+		for(int i=0;i<filestab.length;i++) {
+			String temp = filestab[i].toString();
+			String temp2 = temp.replace(pRep,"");
+			listFichier.add(temp2);
+			System.out.println(temp2); //debug
+		}
 		
 	}
 	
